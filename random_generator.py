@@ -81,7 +81,6 @@ def qr_haar_sp(N):
     E2 = np.array([[0., 1.], [-1., 0.]])
     E3 = 1j*np.array([[0., 1.], [1., 0.]])
     # Omega = np.kron(np.eye(n), E2)
-    #np.random.seed(1)
 
     # Step 1: Generate a random quaternionic matrix (as 4 real matrices)
     A = np.random.randn(n, n)
