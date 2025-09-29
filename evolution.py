@@ -51,6 +51,19 @@ def measure_noreset(psi, i):
     psi = psi.ravel() 
     return psi/np.linalg.norm(psi)
 
+def measure_prob(psi, i):
+    X = [[0.,1.],[1.,0.]]
+    dim_l = 2**i 
+    psi = psi.reshape(dim_l, 2, -1)
+    prob0 = np.linalg.norm(psi[:,0])**2 
+    if np.random.rand() < prob0:
+        psi[:,1] = 0. 
+    else:
+        psi[:,0] = 0.
+        psi = np.einsum('ij,ajb->aib', X, psi)
+    psi = psi.ravel() 
+    return psi/np.linalg.norm(psi), prob0
+
 
 def calc_SA(psi, i0, l0, N, ns):
     v = psi.reshape(2 ** i0, 2 ** l0, 2 ** (N - i0 - l0))
